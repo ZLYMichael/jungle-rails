@@ -53,6 +53,7 @@ class OrdersController < ApplicationController
       end
     end
     order.save!
+    JungleMailer.payment_email(order).deliver_now
     order
   end
 
