@@ -1,3 +1,7 @@
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
 <section class="products-show">
 
   <header class="page-header">
@@ -11,7 +15,6 @@
       <div class="col-sm-4">
         <%= image_tag @product.image.url, class: 'main-img' %>
       </div>
-
       <div class="col-sm-8">
         <dl class="dl-horizontal">
           <dt>Name</dt>
@@ -24,8 +27,28 @@
           <dd><%= @product.price %></dd>
         </dl>
       </div>
+
     </div>
-
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Reviews</h2>
+        <% @product.reviews.sort_by {|obj| obj.created_at}.reverse.each do |review| %>
+          <dl class="dl-horizontal review">
+            <dt>Rating</dt>
+            <% rating = review.rating.to_i %>
+            <dd class="stars"><%= "★" * rating %></dd>          
+            <dt>Description</dt>
+            <dd><%= review.description %></dd>
+          </dl>
+        <% end %>
+      </div>
+    </div>
+    <%= form_for :review, url: product_reviews_url(@product) do |f| %>
+      <div class="form-group">
+      <%= f.text_area(:description) %></p>
+      <%= f.select :rating, options_for_select(1..5) %>
+      <p><%= f.submit %></p>
+      </div>
+    <% end %>
   </article>
-
 </section>

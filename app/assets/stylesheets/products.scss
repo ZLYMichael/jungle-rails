@@ -81,6 +81,19 @@ main section.products-show {
     img.main-img {
       max-width: 100%;
     }
+  textarea {
+    margin: 0px;
+    height: 148px;
+    width: 386px;
+  }
+  .stars {
+  font-size:3em;
+  color: #CACA45;
+  line-height: 0.8;
+  }
+  .review {
+    margin: 20px 0;
+  }
   }
 }
 
